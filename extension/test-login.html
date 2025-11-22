@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f0f9ff;
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    .form-box {
+      width: 100%;
+      max-width: 460px;
+      background: #ffffff;
+      padding: 32px 36px 28px;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      text-align: left;
+      animation: fadeIn 0.35s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-box h2 {
+      margin: 0 0 8px;
+      font-size: 1.8rem;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      margin-bottom: 22px;
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #166fae;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px 14px;
+      font-size: 0.97rem;
+      border: 1px solid #d0e3f6;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #f8fbff;
+    }
+
+    input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.2);
+      background: #ffffff;
+    }
+
+    .eye-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: #2563eb;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 600;
+      background: none !important;
+      border: none !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .btn-main {
+      width: 100%;
+      padding: 14px;
+      margin-top: 24px;
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-main:hover {
+      background: #059669;
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-main:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.22);
+    }
+
+    #msg {
+      margin-top: 14px;
+      min-height: 18px;
+      font-size: 0.9rem;
+      color: #dc2626;
+    }
+
+    .footer-text {
+      margin-top: 18px;
+      font-size: 0.85rem;
+      color: #64748b;
+      text-align: center;
+    }
+
+    .footer-text a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Welcome back</h2>
+    <div class="subtitle">Log in to your Password Wallet account.</div>
+
+    <form id="loginForm" autocomplete="off">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required>
+
+      <label for="pass">Password</label>
+      <div class="eye-wrapper">
+        <input type="password" id="pass" placeholder="Enter your password" required>
+        <span class="eye-icon" id="eye">Show</span>
+      </div>
+
+      <button class="btn-main" type="submit">Login</button>
+    </form>
+
+    <div id="msg"></div>
+    <div class="footer-text">
+      Don't have an account yet? <a href="/test">Create one</a>
+    </div>
+  </div>
+
+  <script>
+    const pass = document.getElementById("pass");
+    const eye = document.getElementById("eye");
+
+    eye.onclick = () => {
+      if (pass.type === "password") {
+        pass.type = "text";
+        eye.textContent = "Hide";
+      } else {
+        pass.type = "password";
+        eye.textContent = "Show";
+      }
+    };
+
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const pwd = pass.value;
+      const msg = document.getElementById("msg");
+
+      if (!email || !pwd) {
+        msg.textContent = "Please fill in both fields.";
+        return;
+      }
+
+      if (typeof chrome === "undefined" || !chrome.runtime) {
+        msg.textContent = "Extension environment not available.";
+        return;
+      }
+
+      chrome.runtime.sendMessage({ type: "LIST_PASSWORDS" }, (resp) => {
+        if (!resp || !resp.list) {
+          msg.textContent = "No saved credentials found.";
+          return;
+        }
+
+        const found = resp.list.some(
+          (entry) => (entry.email === email || entry.username === email) && entry.password === pwd
+        );
+
+        if (found) {
+          // On successful login, go to a simple logged-in page bundled with the extension
+          window.location.href = "test-loggedin.html";
+        } else {
+          msg.textContent = "Invalid email or password.";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

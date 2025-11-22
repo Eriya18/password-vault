@@ -1,0 +1,25 @@
+.homeContainer {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.message {
+  color: green;
+  margin-bottom: 10px;
+}
+
+.loadButton {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.loadButton:hover {
+  background-color: #45a049;
+}

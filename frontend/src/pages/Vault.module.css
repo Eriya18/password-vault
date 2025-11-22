@@ -1,0 +1,21 @@
+.vaultContainer {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+.title {
+  color: #333;
+}
+.message {
+  color: green;
+}
+.input, .button {
+  margin: 10px 0;
+  padding: 8px;
+}
+.vaultList {
+  list-style: none;
+  padding: 0;
+}
+.vaultItem {
+  margin: 5px 0;
+}

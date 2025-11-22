@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logged In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f0f9ff;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: #ffffff;
+      padding: 40px 36px;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .card h1 {
+      margin: 0 0 12px;
+      font-size: 1.9rem;
+      color: #0f172a;
+    }
+
+    .card p {
+      margin: 0 0 24px;
+      font-size: 1rem;
+      color: #64748b;
+    }
+
+    .btn-main {
+      padding: 14px 28px;
+      border-radius: 9999px;
+      border: none;
+      background: #10b981;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-main:hover {
+      background: #059669;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Welcome, you are logged in!</h1>
+    <p>You can now use your saved passwords from the Password Wallet extension.</p>
+    <button class="btn-main" onclick="window.close && window.close()">Close this tab</button>
+  </div>
+</body>
+</html>

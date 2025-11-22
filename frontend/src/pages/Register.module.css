@@ -1,0 +1,145 @@
+.register-container {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.register-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 16px 50px 16px 16px;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+}
+
+.form-group input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+}
+
+.eye-btn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.strength-box {
+  background: rgba(255,255,255,0.2);
+  padding: 16px;
+  border-radius: 16px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.strength-bars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.bar {
+  width: 50px;
+  height: 10px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 5px;
+}
+
+.bar.filled {
+  background: #fff;
+}
+
+.strength-text {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.strength-text.weak { color: #ff6b6b; }
+.strength-text.medium { color: #ffd93d; }
+.strength-text.strong { color: #51cf66; }
+
+.btn-group {
+  display: flex;
+  gap: 16px;
+}
+
+.btn {
+  flex: 1;
+  padding: 16px;
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.3s;
+}
+
+.btn.generate {
+  background: rgba(255,255,255,0.3);
+  color: white;
+}
+
+.btn.generate:hover {
+  background: rgba(255,255,255,0.5);
+  transform: translateY(-3px);
+}
+
+.btn.register {
+  background: #51cf66;
+  color: white;
+}
+
+.btn.register:disabled {
+  background: #adb5bd;
+  cursor: not-allowed;
+}
+
+.btn.register.enabled:hover {
+  background: #40b356;
+  transform: translateY(-3px);
+}
